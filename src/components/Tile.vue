@@ -19,5 +19,7 @@
 
 <style scoped lang="scss">
     .tile {
+        flex: 1;
+        border: solid 1px black;
     }
 </style>

@@ -1,6 +1,19 @@
 <template>
     <div class="area">
-        <Tile/>
+        <div class="rowTile">
+            <Tile/>
+            <Tile/>
+            <Tile/>
+            <Tile/>
+            <Tile/>
+        </div>
+        <div class="rowTile">
+            <Tile/>
+            <Tile/>
+            <Tile/>
+            <Tile/>
+            <Tile/>
+        </div>
     </div>
 </template>
 
@@ -23,5 +36,14 @@ export default {
 
 <style scoped lang="scss">
     .area {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        .rowTile {
+            display: flex;
+            flex-direction: row;
+            flex: 1;
+        }
     }
 </style>
