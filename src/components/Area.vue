@@ -55,6 +55,9 @@ export default {
                 let posX = Math.ceil(newX / this.$refs.area.offsetHeight * 8)
                 let posY = Math.ceil(this.playerY / this.$refs.area.offsetWidth * 8)
                 console.log(this.tileList[this.area.tiles[posX][posY]])
+                if (!this.tileList[this.area.tiles[posX][posY]].traversable) {
+                    return
+                }
                 if (newX <= 0) {
                     this.$store.commit('setCurrentArea', this.map.areas[this.area.x - 1][this.area.y])
                     newX = this.$refs.area.offsetHeight - (this.$options.VELOCITY * 2)
@@ -73,6 +76,9 @@ export default {
                 let posX = Math.ceil(this.playerX / this.$refs.area.offsetHeight * 8)
                 let posY = Math.ceil(newY / this.$refs.area.offsetWidth * 8)
                 console.log(this.tileList[this.area.tiles[posX][posY]])
+                if (!this.tileList[this.area.tiles[posX][posY]].traversable) {
+                    return
+                }
                 if (newY <= 0) {
                     this.$store.commit('setCurrentArea', this.map.areas[this.area.x][this.area.y - 1])
                     newY = this.$refs.area.offsetWidth - (this.$options.VELOCITY * 2)
