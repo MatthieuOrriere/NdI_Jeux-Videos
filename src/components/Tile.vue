@@ -36,6 +36,12 @@
         &.block-bricks {
             background-image: url("../assets/block/bricks.png");
         }
+        &.block-lack {
+            background-image: url("../assets/block/Lack.png");
+        }
+        &.block-rock {
+            background-image: url("../assets/block/Rock.png");
+        }
         &.block-sea {
             background-image: url("../assets/block/sea.png");
         }
