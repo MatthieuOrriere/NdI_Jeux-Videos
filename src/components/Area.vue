@@ -57,10 +57,10 @@ export default {
             set: function (newValue) {
                 this.x = newValue
                 if (this.x <= 0) {
-                    this.$store.commit('setCurrentArea', this.map.areas[this.area.y - 1][this.area.x])
+                    this.$store.commit('setCurrentArea', this.map.areas[this.area.x - 1][this.area.y])
                     this.x = this.$refs.area.offsetHeight - (this.$options.VELOCITY * 2)
                 } else if (this.x >= this.$refs.area.offsetHeight) {
-                    this.$store.commit('setCurrentArea', this.map.areas[this.area.y + 1][this.area.x])
+                    this.$store.commit('setCurrentArea', this.map.areas[this.area.x + 1][this.area.y])
                     this.x = (this.$options.VELOCITY * 2)
                 }
             }
@@ -72,10 +72,10 @@ export default {
             set: function (newValue) {
                 this.y = newValue
                 if (this.y <= 0) {
-                    this.$store.commit('setCurrentArea', this.map.areas[this.area.y][this.area.x - 1])
+                    this.$store.commit('setCurrentArea', this.map.areas[this.area.x][this.area.y - 1])
                     this.y = this.$refs.area.offsetWidth - (this.$options.VELOCITY * 2)
                 } else if (this.y >= this.$refs.area.offsetWidth) {
-                    this.$store.commit('setCurrentArea', this.map.areas[this.area.y][this.area.x + 1])
+                    this.$store.commit('setCurrentArea', this.map.areas[this.area.x][this.area.y + 1])
                     this.y = (this.$options.VELOCITY * 2)
                 }
             }
