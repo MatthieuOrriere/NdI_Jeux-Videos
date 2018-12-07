@@ -1,0 +1,16 @@
+body {
+    background: #000000;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+canvas {
+    display: block;
+    background-color: #333;
+}
+
+pre {
+    position: absolute;
+}
