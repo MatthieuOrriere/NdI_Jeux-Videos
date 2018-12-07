@@ -2,6 +2,7 @@
   <div class="game">
     <div class="game-border"></div>
     <Area v-if="currentArea"
+        :map="mapList[currentMap]"
         :area="areaList[currentArea]"
         :tile-list="tileList"/>
     <div class="game-border">

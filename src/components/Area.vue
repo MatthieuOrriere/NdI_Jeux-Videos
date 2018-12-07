@@ -1,12 +1,10 @@
 <template>
-    <div class="area">
-        <div
-                v-for="tileX in area.tiles"
-                :key="tileX"
+    <div class="area" ref="area">
+        <div v-for="(tileX, indexX) in area.tiles"
+                :key="area.id + indexX"
                 class="rowTile">
-            <Tile
-                v-for="tileY in tileX"
-                :key="tileY"
+            <Tile v-for="(tileY, indexY) in tileX"
+                :key="area.id + indexY"
                 :tile="tileList[tileY]"/>
         </div>
         <img class="player"
@@ -26,14 +24,18 @@ export default {
 
     data: function () {
         return {
-            playerX: 0,
-            playerY: 0
+            x: 50,
+            y: 50
         }
     },
 
     VELOCITY: 50,
 
     props: {
+        map: {
+            type: Object,
+            required: true
+        },
         area: {
             type: Object,
             required: true
@@ -47,6 +49,36 @@ export default {
     computed: {
         currentArea: function () {
             return this.$store.state.currentArea
+        },
+        playerX: {
+            get: function () {
+                return this.x
+            },
+            set: function (newValue) {
+                this.x = newValue
+                if (this.x <= 0) {
+                    this.$store.commit('setCurrentArea', this.map.areas[this.area.y - 1][this.area.x])
+                    this.x = this.$refs.area.offsetHeight - (this.$options.VELOCITY * 2)
+                } else if (this.x >= this.$refs.area.offsetHeight) {
+                    this.$store.commit('setCurrentArea', this.map.areas[this.area.y + 1][this.area.x])
+                    this.x = (this.$options.VELOCITY * 2)
+                }
+            }
+        },
+        playerY: {
+            get: function () {
+                return this.y
+            },
+            set: function (newValue) {
+                this.y = newValue
+                if (this.y <= 0) {
+                    this.$store.commit('setCurrentArea', this.map.areas[this.area.y][this.area.x - 1])
+                    this.y = this.$refs.area.offsetWidth - (this.$options.VELOCITY * 2)
+                } else if (this.y >= this.$refs.area.offsetWidth) {
+                    this.$store.commit('setCurrentArea', this.map.areas[this.area.y][this.area.x + 1])
+                    this.y = (this.$options.VELOCITY * 2)
+                }
+            }
         }
     },
 
