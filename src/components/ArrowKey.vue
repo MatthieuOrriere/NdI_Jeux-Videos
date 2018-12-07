@@ -37,30 +37,30 @@
                 keyRight: false
             }
         },
-        
-        mounted() {
+
+        mounted: function () {
             window.addEventListener('keydown', event => {
-                if (event.keyCode === 38) { 
+                if (event.keyCode === 38) {
                     this.pressUp()
-                } else if (event.keyCode === 37) { 
+                } else if (event.keyCode === 37) {
                     this.pressLeft()
-                } else if (event.keyCode === 40) { 
+                } else if (event.keyCode === 40) {
                     this.pressDown()
-                } else if (event.keyCode === 39) { 
+                } else if (event.keyCode === 39) {
                     this.pressRight()
                 }
-            });
+            })
             window.addEventListener('keyup', event => {
-                if (event.keyCode === 38) { 
+                if (event.keyCode === 38) {
                     this.clearUp()
-                } else if (event.keyCode === 37) { 
+                } else if (event.keyCode === 37) {
                     this.clearLeft()
-                } else if (event.keyCode === 40) { 
+                } else if (event.keyCode === 40) {
                     this.clearDown()
-                } else if (event.keyCode === 39) { 
+                } else if (event.keyCode === 39) {
                     this.clearRight()
                 }
-            });
+            })
         },
 
         methods: {
