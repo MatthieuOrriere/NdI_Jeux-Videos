@@ -1,5 +1,6 @@
 <template>
-    <div class="tile">
+    <div class="tile"
+        :class="tile.img">
     </div>
 </template>
 
@@ -21,5 +22,9 @@
         flex: 1;
         background-color: white;
         border: solid 1px black;
+        &.plain-grass {
+            background-image: url("../assets/plain/grass.png");
+        }
+        background-size: cover;
     }
 </style>

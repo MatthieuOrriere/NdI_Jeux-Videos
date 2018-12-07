@@ -6,8 +6,8 @@
                 class="rowTile">
             <Tile
                 v-for="tileY in tileX"
-                :key="tileY.id"
-                :tile="tileY"/>
+                :key="tileY"
+                :tile="tileList[tileY]"/>
         </div>
     </div>
 </template>
@@ -23,6 +23,10 @@ export default {
 
     props: {
         area: {
+            type: Object,
+            required: true
+        },
+        tileList: {
             type: Object,
             required: true
         }

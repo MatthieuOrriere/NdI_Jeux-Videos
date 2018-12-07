@@ -1,8 +1,8 @@
 <template>
   <div class="game">
-    <Area
-      :area="areaList[currentArea]"
-    />
+    <Area v-cloak
+        :area="areaList[currentArea]"
+        :tile-list="tileList"/>
   </div>
 </template>
 
@@ -84,7 +84,7 @@ export default {
           let tileListY = []
           for (let tileY = 0; tileY < MAX_TILE_Y; tileY++) {
             let tileId = this.randomUuid()
-            this.addTileList(tileId, 'img', 'traversable', 'lifecost')
+            this.addTileList(tileId, 'plain-grass', 'traversable', 'lifecost')
             tileListY.push(tileId)
           }
           tileListX.push(tileListY)
@@ -192,14 +192,16 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
   .game {
+    position: relative;
     height: 100%;
     width: 100%;
-    background-color: gray;
+    background-color: rgb(76, 30, 197);
+    background-color: rgb(245, 254, 12);
     background-image: repeating-linear-gradient(
       -45deg,
       transparent,
       transparent 35px,
-      rgba(255,255,255,.5) 35px,
-      rgba(255,255,255,.5) 70px);
+      rgb(222, 11, 118) 35px,
+      rgb(222, 11, 118) 70px);
   }
 </style>
