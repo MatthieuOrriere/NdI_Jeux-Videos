@@ -1,11 +1,11 @@
 <template>
   <div class="game">
     <div class="game-border"></div>
-    <Area v-cloak
+    <Area v-if="currentArea"
         :area="areaList[currentArea]"
         :tile-list="tileList"/>
     <div class="game-border">
-      <Map v-cloak
+      <Map v-if="currentMap"
           :map="mapList[currentMap]"/>
       <ArrowKey/>
     </div>
