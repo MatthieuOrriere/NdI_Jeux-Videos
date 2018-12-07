@@ -19,7 +19,10 @@ export default {
     return {
       mapList: {},
       areaList: {},
-      tileList: {}
+      tileList: {},
+      myMap: [],
+      cpt: 1,
+      listBlock: {}
     }
   },
 
@@ -50,6 +53,26 @@ export default {
     const MAX_AREA_Y = 9
     const MAX_TILE_X = 9
     const MAX_TILE_Y = 9
+
+    for (let x = 0; x < MAX_AREA_X; x++) {
+      this.myMap[x] = []
+      for (let y = 0; y < MAX_AREA_Y; y++) {
+        this.myMap[ x ][ y ] = 0
+      }
+    }
+
+    for (let x = 0; x < MAX_AREA_X; x++) {
+      for (let y = 0; y < MAX_AREA_Y; y++) {
+        if (this.myMap[x][y] === 0) {
+          let rand = this.randomNumber()
+          let max = this.defineSizeMax(rand)
+          this.checkAndSetBlock(max, x, y)
+        }
+      }
+    }
+
+    console.log(this.myMap.join('\n'))
+    console.log(this.listBlock)
 
     let areaListX = []
     for (let areaX = 0; areaX < MAX_AREA_X; areaX++) {
@@ -92,14 +115,14 @@ export default {
       this.currentArea = newArea
     },
 
-    addMapList (id, name) {
+    addMapList: function (id, name) {
       this.$set(this.mapList, id, {
         id,
         name,
         areas: null
       })
     },
-    addAreaList (id, x, y, tiles) {
+    addAreaList: function (id, x, y, tiles) {
       this.$set(this.areaList, id, {
         id,
         x,
@@ -107,7 +130,7 @@ export default {
         tiles
       })
     },
-    addTileList (id, img, traversable, lifecost) {
+    addTileList: function (id, img, traversable, lifecost) {
       this.$set(this.tileList, id, {
         id,
         img,
@@ -116,12 +139,51 @@ export default {
       })
     },
 
-    addMapArea (id, areas) {
+    addMapArea: function (id, areas) {
       this.$set(this.mapList[id], 'areas', areas)
     },
 
     randomUuid: function () {
       return Math.random().toString(36).substring(2) + (new Date()).getTime().toString(36)
+    },
+
+    randomNumber: function () {
+      return Math.floor(Math.random() * Math.floor(100))
+    },
+    defineSizeMax: function (rand) {
+      if (rand >= 80) {
+        return 5
+      }
+      if (rand >= 60) {
+          return 4
+      }
+      if (rand >= 40) {
+          return 3
+      }
+      if (rand >= 20) {
+          return 2
+      } else {
+          return 1
+      }
+    },
+    checkAndSetBlock: function (distance, positionX, positionY) {
+      if (positionX + distance > 9) distance = 9 - positionX
+      if (positionY + distance > 9) distance = 9 - positionY
+      let block = []
+
+      for (let x = 0; x < distance; x++) {
+        block[x] = []
+        for (let y = 0; y < distance; y++) {
+          if (this.myMap[x + positionX][y + positionY] === 0) {
+            this.myMap[x + positionX][y + positionY] = this.cpt
+            block[x][y] = 1
+          } else {
+            block[x][y] = 0
+          }
+        }
+      }
+      this.listBlock[this.cpt] = block
+      this.cpt += 1
     }
   }
 }
@@ -132,5 +194,12 @@ export default {
   .game {
     height: 100%;
     width: 100%;
+    background-color: gray;
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 35px,
+      rgba(255,255,255,.5) 35px,
+      rgba(255,255,255,.5) 70px);
   }
 </style>
