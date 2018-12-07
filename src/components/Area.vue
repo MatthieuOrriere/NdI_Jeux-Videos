@@ -47,37 +47,40 @@ export default {
     },
 
     computed: {
-        currentArea: function () {
-            return this.$store.state.currentArea
-        },
         playerX: {
             get: function () {
                 return this.x
             },
-            set: function (newValue) {
-                if (newValue <= 0) {
+            set: function (newX) {
+                let posX = Math.ceil(newX / this.$refs.area.offsetHeight * 8)
+                let posY = Math.ceil(this.playerY / this.$refs.area.offsetWidth * 8)
+                console.log(this.tileList[this.area.tiles[posX][posY]])
+                if (newX <= 0) {
                     this.$store.commit('setCurrentArea', this.map.areas[this.area.x - 1][this.area.y])
-                    newValue = this.$refs.area.offsetHeight - (this.$options.VELOCITY * 2)
-                } else if (newValue >= this.$refs.area.offsetHeight) {
+                    newX = this.$refs.area.offsetHeight - (this.$options.VELOCITY * 2)
+                } else if (newX >= this.$refs.area.offsetHeight - this.$options.VELOCITY) {
                     this.$store.commit('setCurrentArea', this.map.areas[this.area.x + 1][this.area.y])
-                    newValue = (this.$options.VELOCITY * 2)
+                    newX = this.$options.VELOCITY
                 }
-                this.x = newValue
+                this.x = newX
             }
         },
         playerY: {
             get: function () {
                 return this.y
             },
-            set: function (newValue) {
-                if (newValue <= 0) {
+            set: function (newY) {
+                let posX = Math.ceil(this.playerX / this.$refs.area.offsetHeight * 8)
+                let posY = Math.ceil(newY / this.$refs.area.offsetWidth * 8)
+                console.log(this.tileList[this.area.tiles[posX][posY]])
+                if (newY <= 0) {
                     this.$store.commit('setCurrentArea', this.map.areas[this.area.x][this.area.y - 1])
-                    newValue = this.$refs.area.offsetWidth - (this.$options.VELOCITY * 2)
-                } else if (newValue >= this.$refs.area.offsetWidth) {
+                    newY = this.$refs.area.offsetWidth - (this.$options.VELOCITY * 2)
+                } else if (newY >= this.$refs.area.offsetWidth - this.$options.VELOCITY) {
                     this.$store.commit('setCurrentArea', this.map.areas[this.area.x][this.area.y + 1])
-                    newValue = (this.$options.VELOCITY * 2)
+                    newY = this.$options.VELOCITY
                 }
-                this.y = newValue
+                this.y = newY
             }
         }
     },
