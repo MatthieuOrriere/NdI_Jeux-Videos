@@ -47,6 +47,14 @@ export default {
     },
 
     computed: {
+        score: {
+            get: function () {
+                return this.$store.state.score
+            },
+            set: function (newScore) {
+                this.$store.commit('setScore', newScore)
+            }
+        },
         playerX: {
             get: function () {
                 return this.x
@@ -54,7 +62,6 @@ export default {
             set: function (newX) {
                 let posX = Math.ceil(newX / this.$refs.area.offsetHeight * 8)
                 let posY = Math.ceil(this.playerY / this.$refs.area.offsetWidth * 8)
-                console.log(this.tileList[this.area.tiles[posX][posY]])
                 if (!this.tileList[this.area.tiles[posX][posY]].traversable) {
                     return
                 }
@@ -66,6 +73,7 @@ export default {
                     newX = this.$options.VELOCITY
                 }
                 this.x = newX
+                this.score += 10
             }
         },
         playerY: {
@@ -75,7 +83,6 @@ export default {
             set: function (newY) {
                 let posX = Math.ceil(this.playerX / this.$refs.area.offsetHeight * 8)
                 let posY = Math.ceil(newY / this.$refs.area.offsetWidth * 8)
-                console.log(this.tileList[this.area.tiles[posX][posY]])
                 if (!this.tileList[this.area.tiles[posX][posY]].traversable) {
                     return
                 }
@@ -87,6 +94,7 @@ export default {
                     newY = this.$options.VELOCITY
                 }
                 this.y = newY
+                this.score += 10
             }
         }
     },

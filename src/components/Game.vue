@@ -1,6 +1,8 @@
 <template>
   <div class="game">
-    <div class="game-border"></div>
+    <div class="game-border">
+      <Scoring/>
+    </div>
     <Area v-if="currentArea"
         :map="mapList[currentMap]"
         :area="areaList[currentArea]"
@@ -15,6 +17,7 @@
 
 <script>
 import Area from '@/components/Area'
+import Scoring from '@/components/Scoring'
 import Map from '@/components/Map'
 import ArrowKey from '@/components/ArrowKey'
 import { tileOneOne } from '@/mixins/TileOneOne'
@@ -23,6 +26,7 @@ export default {
   name: 'Game',
   components: {
     Area,
+    Scoring,
     Map,
     ArrowKey
   },
@@ -67,8 +71,6 @@ export default {
 
     const MAX_AREA_X = 9
     const MAX_AREA_Y = 9
-    const MAX_TILE_X = 9
-    const MAX_TILE_Y = 9
 
     for (let x = 0; x < MAX_AREA_X; x++) {
       this.myMap[x] = []
@@ -94,24 +96,14 @@ export default {
     for (let areaX = 0; areaX < MAX_AREA_X; areaX++) {
       let areaListY = []
       for (let areaY = 0; areaY < MAX_AREA_Y; areaY++) {
-        let matriceTile = this.randomTileOneOne();
-        console.log(matriceTile)
-        /*
-        for (let tileX = 0; tileX < MAX_TILE_X; tileX++) {
-          let tileListY = []
-          for (let tileY = 0; tileY < MAX_TILE_Y; tileY++) {
-            let tileId = this.randomUuid()
-            this.addTileList(tileId, 'plain-grass-tile', true, 0)
-            tileListY.push(tileId)
-          }
-          tileListX.push(tileListY)
-        }*/
+
+        let matriceTile = this.randomTileOneOne()
         let tileListX = []
         for (let x of matriceTile) {
           let tileListY = []
-          for (let y of x){
+          for (let y of x) {
             let tileId = this.randomUuid()
-            this.addTileList(tileId, y, 'traversable', 'lifecost')
+            this.addTileList(tileId, y.img, y.traversable, y.lifecost)
             tileListY.push(tileId)
           }
           tileListX.push(tileListY)

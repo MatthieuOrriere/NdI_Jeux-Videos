@@ -6,7 +6,8 @@ Vue.use(Vuex)
 export const store = new Vuex.Store({
     state: {
       currentMap: null,
-      currentArea: null
+      currentArea: null,
+      score: 0
     },
     mutations: {
       setCurrentMap (state, id) {
@@ -14,6 +15,9 @@ export const store = new Vuex.Store({
       },
       setCurrentArea (state, id) {
         Vue.set(state, 'currentArea', id)
+      },
+      setScore (state, score) {
+        Vue.set(state, 'score', score)
       }
     }
   })
