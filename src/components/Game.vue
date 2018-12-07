@@ -103,7 +103,7 @@ export default {
           let tileListY = []
           for (let y of x) {
             let tileId = this.randomUuid()
-            this.addTileList(tileId, y.img, y.traversable, y.lifecost)
+            this.addTileList(tileId, y.img, y.traversable, y.lifecost, y.character)
             tileListY.push(tileId)
           }
           tileListX.push(tileListY)
@@ -149,12 +149,13 @@ export default {
         tiles
       })
     },
-    addTileList: function (id, img, traversable, lifecost) {
+    addTileList: function (id, img, traversable, lifecost, character) {
       this.$set(this.tileList, id, {
         id,
         img,
         traversable,
-        lifecost
+        lifecost,
+        character
       })
     },
 

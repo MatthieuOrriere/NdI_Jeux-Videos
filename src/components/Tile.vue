@@ -1,6 +1,11 @@
 <template>
     <div class="tile"
         :class="tile.img">
+        <div v-if="tile.character"
+            class="character"
+            :class="tile.character">
+
+        </div>
     </div>
 </template>
 
@@ -46,5 +51,22 @@
             background-image: url("../assets/block/sea.png");
         }
         background-size: cover;
+        .character {
+            height: 100%;
+            width: 100%;
+            &.character-fox {
+                background-image: url("../assets/character/Fox.png");
+            }
+            &.character-fox-angry {
+                background-image: url("../assets/character/FoxAngry.png");
+            }
+            &.character-knight {
+                background-image: url("../assets/character/Knight.png");
+            }
+            &.character-pirat-parrot {
+                background-image: url("../assets/character/PiratParrot.png");
+            }
+            background-size: cover;
+        }
     }
 </style>
