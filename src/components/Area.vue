@@ -1,59 +1,13 @@
 <template>
     <div class="area">
-        <div class="rowTile">
-            <Tile/>
-            <Tile/>
-            <Tile/>
-            <Tile/>
-            <Tile/>
-            <Tile/>
-            <Tile/>
-            <Tile/>
-            <Tile/>
-        </div>
-        <div class="rowTile">
-            <Tile/>
-            <Tile/>
-            <Tile/>
-            <Tile/>
-            <Tile/>
-            <Tile/>
-            <Tile/>
-            <Tile/>
-            <Tile/>
-        </div>
-        <div class="rowTile">
-            <Tile/>
-            <Tile/>
-            <Tile/>
-            <Tile/>
-            <Tile/>
-            <Tile/>
-            <Tile/>
-            <Tile/>
-            <Tile/>
-        </div>
-        <div class="rowTile">
-            <Tile/>
-            <Tile/>
-            <Tile/>
-            <Tile/>
-            <Tile/>
-            <Tile/>
-            <Tile/>
-            <Tile/>
-            <Tile/>
-        </div>
-        <div class="rowTile">
-            <Tile/>
-            <Tile/>
-            <Tile/>
-            <Tile/>
-            <Tile/>
-            <Tile/>
-            <Tile/>
-            <Tile/>
-            <Tile/>
+        <div
+                v-for="tileX in area.tiles"
+                :key="tileX"
+                class="rowTile">
+            <Tile
+                v-for="tileY in tileX"
+                :key="tileY.id"
+                :tile="tileY"/>
         </div>
     </div>
 </template>
@@ -67,9 +21,16 @@ export default {
         Tile
     },
 
-    data () {
-        return {
-            msg: 'Welcome to Your Vue.js App'
+    props: {
+        area: {
+            type: Object,
+            required: true
+        }
+    },
+
+    computed: {
+        currentArea: function () {
+            return this.$store.state.currentArea
         }
     }
 }
@@ -80,7 +41,7 @@ export default {
         display: flex;
         flex-direction: column;
         height: 100%;
-        width: 100%;
+        width: 100vh;
         .rowTile {
             display: flex;
             flex-direction: row;

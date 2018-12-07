@@ -7,11 +7,10 @@
     export default {
         name: 'Tile',
 
-        data () {
-            return {
-                img: '',
-                traversable: true,
-                lifecost: 0
+        props: {
+            tile: {
+                type: Object,
+                required: true
             }
         }
     }
