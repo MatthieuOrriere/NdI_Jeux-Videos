@@ -93,13 +93,24 @@ export default {
     for (let areaX = 0; areaX < MAX_AREA_X; areaX++) {
       let areaListY = []
       for (let areaY = 0; areaY < MAX_AREA_Y; areaY++) {
-
-        let tileListX = []
+        let matriceTile = this.randomTileOneOne();
+        console.log(matriceTile)
+        /*
         for (let tileX = 0; tileX < MAX_TILE_X; tileX++) {
           let tileListY = []
           for (let tileY = 0; tileY < MAX_TILE_Y; tileY++) {
             let tileId = this.randomUuid()
             this.addTileList(tileId, 'plain-grass-tile', 'traversable', 'lifecost')
+            tileListY.push(tileId)
+          }
+          tileListX.push(tileListY)
+        }*/
+        let tileListX = []
+        for (let x of matriceTile) {
+          let tileListY = []
+          for (let y of x){
+            let tileId = this.randomUuid()
+            this.addTileList(tileId, y, 'traversable', 'lifecost')
             tileListY.push(tileId)
           }
           tileListX.push(tileListY)

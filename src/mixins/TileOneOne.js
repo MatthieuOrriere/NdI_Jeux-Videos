@@ -25,18 +25,24 @@ export const tileOneOne = {
                 tileList[tileX] = []
                 for (let tileY = 0; tileY < 9; tileY++) {
                     let rand = this.randomNumber(100)
-                    let randomIndicePlain = this.randomNumber(this.TABLE_PLAIN.length)
-                    let randomIndiceBlock = this.randomNumber(this.TABLE_BLOCK.length)
+                    let randomIndicePlain = Math.floor(Math.random() * Math.floor(this.$options.TABLE_PLAIN.length))
+                    let randomIndiceBlock = Math.floor(Math.random() * Math.floor(this.$options.TABLE_BLOCK.length))
+
                     if (tileX === 0 || tileY === 0) {
-                        tileList[tileX][tileY] = this.TABLE_PLAIN[randomIndicePlain]
+                        tileList[tileX][tileY] = this.$options.TABLE_PLAIN[randomIndicePlain]
+                        tileList[tileX][tileY].traversable = true
+                        continue
                     }
                     if (rand > 75) {
-                        tileList[tileX][tileY] = this.TABLE_PLAIN[randomIndicePlain]
+                        tileList[tileX][tileY] = this.$options.TABLE_BLOCK[randomIndiceBlock]
+                        tileList[tileX][tileY].traversable = false
                     } else {
-                        tileList[tileX][tileY] = this.TABLE_BLOCK[randomIndiceBlock]
+                        tileList[tileX][tileY] = this.$options.TABLE_PLAIN[randomIndicePlain]
+                        tileList[tileX][tileY].traversable = true
                     }
                 }
             }
+            console.log(tileList)
             return tileList
         }
 
