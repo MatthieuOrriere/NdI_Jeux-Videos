@@ -1,18 +1,25 @@
 <template>
   <div class="game">
+    <div class="game-border"></div>
     <Area v-cloak
         :area="areaList[currentArea]"
         :tile-list="tileList"/>
+    <div class="game-border">
+      <Map v-cloak
+          :map="mapList[currentMap]"/>
+    </div>
   </div>
 </template>
 
 <script>
 import Area from '@/components/Area'
+import Map from '@/components/Map'
 
 export default {
   name: 'Game',
   components: {
-    Area
+    Area,
+    Map
   },
 
   data: function () {
@@ -192,16 +199,19 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
   .game {
-    position: relative;
+    display: flex;
     height: 100%;
     width: 100%;
     background-color: rgb(76, 30, 197);
-    background-color: rgb(245, 254, 12);
     background-image: repeating-linear-gradient(
       -45deg,
       transparent,
       transparent 35px,
-      rgb(222, 11, 118) 35px,
-      rgb(222, 11, 118) 70px);
+      rgb(245, 254, 12) 35px,
+      rgb(245, 254, 12) 70px);
+    .game-border {
+      display: flex;
+      flex: 1;
+    }
   }
 </style>

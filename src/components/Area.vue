@@ -46,7 +46,6 @@ export default {
         flex-direction: column;
         height: 100%;
         width: 100vh;
-        margin: auto;
         .rowTile {
             display: flex;
             flex-direction: row;
