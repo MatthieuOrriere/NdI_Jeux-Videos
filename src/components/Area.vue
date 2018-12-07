@@ -55,14 +55,14 @@ export default {
                 return this.x
             },
             set: function (newValue) {
-                this.x = newValue
-                if (this.x <= 0) {
+                if (newValue <= 0) {
                     this.$store.commit('setCurrentArea', this.map.areas[this.area.x - 1][this.area.y])
-                    this.x = this.$refs.area.offsetHeight - (this.$options.VELOCITY * 2)
-                } else if (this.x >= this.$refs.area.offsetHeight) {
+                    newValue = this.$refs.area.offsetHeight - (this.$options.VELOCITY * 2)
+                } else if (newValue >= this.$refs.area.offsetHeight) {
                     this.$store.commit('setCurrentArea', this.map.areas[this.area.x + 1][this.area.y])
-                    this.x = (this.$options.VELOCITY * 2)
+                    newValue = (this.$options.VELOCITY * 2)
                 }
+                this.x = newValue
             }
         },
         playerY: {
@@ -70,14 +70,14 @@ export default {
                 return this.y
             },
             set: function (newValue) {
-                this.y = newValue
-                if (this.y <= 0) {
+                if (newValue <= 0) {
                     this.$store.commit('setCurrentArea', this.map.areas[this.area.x][this.area.y - 1])
-                    this.y = this.$refs.area.offsetWidth - (this.$options.VELOCITY * 2)
-                } else if (this.y >= this.$refs.area.offsetWidth) {
+                    newValue = this.$refs.area.offsetWidth - (this.$options.VELOCITY * 2)
+                } else if (newValue >= this.$refs.area.offsetWidth) {
                     this.$store.commit('setCurrentArea', this.map.areas[this.area.x][this.area.y + 1])
-                    this.y = (this.$options.VELOCITY * 2)
+                    newValue = (this.$options.VELOCITY * 2)
                 }
+                this.y = newValue
             }
         }
     },
