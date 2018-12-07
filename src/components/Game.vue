@@ -2,6 +2,7 @@
   <div class="game">
     <div class="game-border"></div>
     <Area v-if="currentArea"
+        :map="mapList[currentMap]"
         :area="areaList[currentArea]"
         :tile-list="tileList"/>
     <div class="game-border">
@@ -100,7 +101,7 @@ export default {
           let tileListY = []
           for (let tileY = 0; tileY < MAX_TILE_Y; tileY++) {
             let tileId = this.randomUuid()
-            this.addTileList(tileId, 'plain-grass-tile', 'traversable', 'lifecost')
+            this.addTileList(tileId, 'plain-grass-tile', true, 0)
             tileListY.push(tileId)
           }
           tileListX.push(tileListY)

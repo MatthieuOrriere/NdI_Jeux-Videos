@@ -1,12 +1,10 @@
 <template>
-    <div class="area">
-        <div
-                v-for="tileX in area.tiles"
-                :key="tileX"
+    <div class="area" ref="area">
+        <div v-for="(tileX, indexX) in area.tiles"
+                :key="area.id + indexX"
                 class="rowTile">
-            <Tile
-                v-for="tileY in tileX"
-                :key="tileY"
+            <Tile v-for="(tileY, indexY) in tileX"
+                :key="area.id + indexY"
                 :tile="tileList[tileY]"/>
         </div>
         <img class="player"
@@ -26,14 +24,18 @@ export default {
 
     data: function () {
         return {
-            playerX: 0,
-            playerY: 0
+            x: 50,
+            y: 50
         }
     },
 
     VELOCITY: 50,
 
     props: {
+        map: {
+            type: Object,
+            required: true
+        },
         area: {
             type: Object,
             required: true
@@ -45,8 +47,47 @@ export default {
     },
 
     computed: {
-        currentArea: function () {
-            return this.$store.state.currentArea
+        playerX: {
+            get: function () {
+                return this.x
+            },
+            set: function (newX) {
+                let posX = Math.ceil(newX / this.$refs.area.offsetHeight * 8)
+                let posY = Math.ceil(this.playerY / this.$refs.area.offsetWidth * 8)
+                console.log(this.tileList[this.area.tiles[posX][posY]])
+                if (!this.tileList[this.area.tiles[posX][posY]].traversable) {
+                    return
+                }
+                if (newX <= 0) {
+                    this.$store.commit('setCurrentArea', this.map.areas[this.area.x - 1][this.area.y])
+                    newX = this.$refs.area.offsetHeight - (this.$options.VELOCITY * 2)
+                } else if (newX >= this.$refs.area.offsetHeight - this.$options.VELOCITY) {
+                    this.$store.commit('setCurrentArea', this.map.areas[this.area.x + 1][this.area.y])
+                    newX = this.$options.VELOCITY
+                }
+                this.x = newX
+            }
+        },
+        playerY: {
+            get: function () {
+                return this.y
+            },
+            set: function (newY) {
+                let posX = Math.ceil(this.playerX / this.$refs.area.offsetHeight * 8)
+                let posY = Math.ceil(newY / this.$refs.area.offsetWidth * 8)
+                console.log(this.tileList[this.area.tiles[posX][posY]])
+                if (!this.tileList[this.area.tiles[posX][posY]].traversable) {
+                    return
+                }
+                if (newY <= 0) {
+                    this.$store.commit('setCurrentArea', this.map.areas[this.area.x][this.area.y - 1])
+                    newY = this.$refs.area.offsetWidth - (this.$options.VELOCITY * 2)
+                } else if (newY >= this.$refs.area.offsetWidth - this.$options.VELOCITY) {
+                    this.$store.commit('setCurrentArea', this.map.areas[this.area.x][this.area.y + 1])
+                    newY = this.$options.VELOCITY
+                }
+                this.y = newY
+            }
         }
     },
 

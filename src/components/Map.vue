@@ -1,11 +1,11 @@
 <template>
     <div class="map">
         <div class="mapBox">
-            <div v-for="areaX in map.areas"
-                    :key="areaX"
+            <div v-for="(areaX, indexX) in map.areas"
+                    :key="map.id + indexX"
                     class="mapRow">
-                <div v-for="areaY in areaX"
-                        :key="areaY"
+                <div v-for="(areaY, indexY) in areaX"
+                        :key="map.id + indexY"
                         class="mapTile"
                         :class="{ 'current': currentArea === areaY }"/>
             </div>
