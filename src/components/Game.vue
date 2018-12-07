@@ -94,7 +94,7 @@ export default {
           let tileListY = []
           for (let tileY = 0; tileY < MAX_TILE_Y; tileY++) {
             let tileId = this.randomUuid()
-            this.addTileList(tileId, 'plain-grass', 'traversable', 'lifecost')
+            this.addTileList(tileId, 'plain-grass-tile', 'traversable', 'lifecost')
             tileListY.push(tileId)
           }
           tileListX.push(tileListY)
