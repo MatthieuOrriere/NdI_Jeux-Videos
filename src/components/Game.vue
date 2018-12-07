@@ -16,6 +16,7 @@
 import Area from '@/components/Area'
 import Map from '@/components/Map'
 import ArrowKey from '@/components/ArrowKey'
+import { tileOneOne } from '@/mixins/TileOneOne'
 
 export default {
   name: 'Game',
@@ -24,6 +25,9 @@ export default {
     Map,
     ArrowKey
   },
+  mixins: [
+    tileOneOne
+  ],
 
   data: function () {
     return {
@@ -56,6 +60,7 @@ export default {
   },
 
   created: function () {
+
     let mapId = this.randomUuid()
     this.addMapList(mapId, 'map1')
 
