@@ -21,7 +21,6 @@
     .tile {
         flex: 1;
         background-color: white;
-        border: solid 1px black;
         &.plain-grass {
             background-image: url("../assets/plain/grass.png");
         }

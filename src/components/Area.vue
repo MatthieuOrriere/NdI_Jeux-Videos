@@ -46,6 +46,8 @@ export default {
         flex-direction: column;
         height: 100%;
         width: 100vh;
+        border-left: solid 3px rgb(222, 11, 118);
+        border-right: solid 3px rgb(222, 11, 118);
         .rowTile {
             display: flex;
             flex-direction: row;

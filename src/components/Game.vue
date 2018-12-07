@@ -7,6 +7,7 @@
     <div class="game-border">
       <Map v-cloak
           :map="mapList[currentMap]"/>
+      <ArrowKey/>
     </div>
   </div>
 </template>
@@ -14,12 +15,14 @@
 <script>
 import Area from '@/components/Area'
 import Map from '@/components/Map'
+import ArrowKey from '@/components/ArrowKey'
 
 export default {
   name: 'Game',
   components: {
     Area,
-    Map
+    Map,
+    ArrowKey
   },
 
   data: function () {
@@ -160,14 +163,11 @@ export default {
     defineSizeMax: function (rand) {
       if (rand >= 80) {
         return 5
-      }
-      if (rand >= 60) {
+      } else if (rand >= 60) {
           return 4
-      }
-      if (rand >= 40) {
+      } else if (rand >= 40) {
           return 3
-      }
-      if (rand >= 20) {
+      } else if (rand >= 20) {
           return 2
       } else {
           return 1
@@ -211,6 +211,7 @@ export default {
       rgb(245, 254, 12) 70px);
     .game-border {
       display: flex;
+      flex-direction: column;
       flex: 1;
     }
   }

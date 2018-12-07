@@ -40,10 +40,12 @@
         margin: 20px;
         background: white;
         border: solid 3px rgb(222, 11, 118);
+        overflow: auto;
         .mapBox {
             margin: auto;
             display: flex;
             flex-direction: column;
+            align-items: center;
             .mapRow {
                 display: flex;
                 flex-direction: row;
