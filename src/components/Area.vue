@@ -62,7 +62,8 @@ export default {
             set: function (newX) {
                 let posX = Math.ceil(newX / this.$refs.area.offsetHeight * 8)
                 let posY = Math.ceil(this.playerY / this.$refs.area.offsetWidth * 8)
-                if (!this.tileList[this.area.tiles[posX][posY]].traversable) {
+                let tile = this.tileList[this.area.tiles[posX][posY]]
+                if (!tile.traversable) {
                     return
                 }
                 if (newX <= 0) {
@@ -72,8 +73,12 @@ export default {
                     this.$store.commit('setCurrentArea', this.map.areas[this.area.x + 1][this.area.y])
                     newX = this.$options.VELOCITY
                 }
+                if (tile.character) {
+                    this.score += 100
+                    tile.character = null
+                }
                 this.x = newX
-                this.score += 10
+                this.score += 1
             }
         },
         playerY: {
@@ -83,7 +88,8 @@ export default {
             set: function (newY) {
                 let posX = Math.ceil(this.playerX / this.$refs.area.offsetHeight * 8)
                 let posY = Math.ceil(newY / this.$refs.area.offsetWidth * 8)
-                if (!this.tileList[this.area.tiles[posX][posY]].traversable) {
+                let tile = this.tileList[this.area.tiles[posX][posY]]
+                if (!tile.traversable) {
                     return
                 }
                 if (newY <= 0) {
@@ -93,8 +99,12 @@ export default {
                     this.$store.commit('setCurrentArea', this.map.areas[this.area.x][this.area.y + 1])
                     newY = this.$options.VELOCITY
                 }
+                if (tile.character) {
+                    this.score += 100
+                    tile.character = null
+                }
                 this.y = newY
-                this.score += 10
+                this.score += 1
             }
         }
     },
