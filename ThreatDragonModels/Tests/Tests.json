@@ -1,0 +1,16 @@
+{
+  "summary": {
+    "title": "Tests",
+    "owner": "Matthieu O"
+  },
+  "detail": {
+    "contributors": [],
+    "diagrams": [
+      {
+        "title": "tests",
+        "thumbnail": "./public/content/images/thumbnail.jpg",
+        "id": 0
+      }
+    ]
+  }
+}
